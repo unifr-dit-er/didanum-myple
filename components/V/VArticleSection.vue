@@ -12,6 +12,11 @@ watchEffect(() => {
   const isVisible = useElementVisibility(section)
   visibility.value = isVisible
 })
+
+function stripSandbox(html: string) {
+  // remove sandbox="", sandbox="..."
+  return html.replace(/\s*sandbox=(["']).*?\1/gi, '')
+}
 </script>
 
 <template>
@@ -22,7 +27,7 @@ watchEffect(() => {
     <div v-if="$slots.header" class="my-6">
       <slot name="header"></slot>
     </div>
-    <div v-html="content" class="my-6 prose max-w-none"></div>
+    <div v-html="stripSandbox(content)" class="my-6 prose max-w-none"></div>
     <div v-if="$slots.footer" class="my-6">
       <slot name="footer"></slot>
     </div>
