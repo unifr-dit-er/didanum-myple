@@ -1,0 +1,14 @@
+[Unit]
+Description=Didanum Myple Container
+
+[Container]
+Label=app=didanum-myple
+ContainerName=didanum-myple
+Image=localhost/didanum-myple:latest
+PublishPort=127.0.0.1:8082:3000
+
+[Service]
+ExecStartPre=/usr/bin/podman rm -f didanum-myple
+
+[Install]
+WantedBy=default.target
