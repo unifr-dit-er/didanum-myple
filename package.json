@@ -11,7 +11,6 @@
   },
   "devDependencies": {
     "@iconify-json/tabler": "^1.2.11",
-    "@nuxt/devtools": "^1.5",
     "@nuxt/icon": "^1.10.1",
     "@nuxtjs/i18n": "^9.0.0",
     "@nuxtjs/tailwindcss": "^6.12",
@@ -27,6 +26,7 @@
     "@vueuse/components": "^11.1.0"
   },
   "overrides": {
-    "vue": "latest"
+    "vue": "latest",
+    "vite": "^7.3.6"
   }
 }
