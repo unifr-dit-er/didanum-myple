@@ -14,15 +14,8 @@ export default defineEventHandler(async (event) => {
     })
   )
 
-  const trainings = await useDirectus().request(
-    aggregate('trainings', {
-      aggregate: { count: '*' },
-    })
-  )
-
   return {
     activities: activities[0].count,
-    tools: tools[0].count,
-    trainings: trainings[0].count
+    tools: tools[0].count
   }
 })

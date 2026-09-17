@@ -2,14 +2,19 @@
 import IconTools from '@/components/Icon/Tools.vue'
 import IconSchool from '@/components/Icon/School.vue'
 import IconBook from '@/components/Icon/Book.vue'
+import type { Component } from 'vue'
+
+type NavLink = { title: string; icon: Component; class: string; path?: string; href?: string }
+
 const localePath = useLocalePath()
 const switchLocalePath = useSwitchLocalePath()
+const trainingCatalogUrl = useTrainingCatalogUrl()
 
-const links = [
+const links = computed<NavLink[]>(() => [
   { title: "activities", path: "/activities", icon: IconBook, class: "text-rose-500" },
   { title: "tools", path: "/tools", icon: IconTools, class: "text-indigo-500" },
-  { title: "training", path: "/trainings", icon : IconSchool, class: "text-teal-500" }
-]
+  { title: "training", href: trainingCatalogUrl.value, icon: IconSchool, class: "text-teal-500" }
+])
 const langs: { id: "fr" | "de" | "it"; title: string }[] = [
   { id: "fr", title: "Français" },
   { id: "de", title: "Deutsch" },
@@ -26,7 +31,10 @@ const langs: { id: "fr" | "de" | "it"; title: string }[] = [
         </div>
         <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
           <li v-for="link in links" :key="link.title" class="font-semibold">
-            <NuxtLink :to="localePath(link.path)">
+            <a v-if="link.href" :href="link.href" target="_blank" rel="noopener noreferrer">
+              <component :is="link.icon" :class="link.class" />{{ $t(link.title) }}<IconExternalLink class="w-[1em] h-[1em] text-current" />
+            </a>
+            <NuxtLink v-else :to="localePath(link.path || '/')">
               <component :is="link.icon" :class="link.class" />{{ $t(link.title) }}
             </NuxtLink>
           </li>
@@ -36,7 +44,10 @@ const langs: { id: "fr" | "de" | "it"; title: string }[] = [
       <NuxtLink :to="localePath('/')" class="btn btn-ghost text-xl">MyPLE</NuxtLink>
       <ul class="menu menu-horizontal px-1 ml-6 hidden lg:flex">
         <li v-for="link in links" :key="link.title" class="font-semibold">
-          <NuxtLink :to="localePath(link.path)">
+          <a v-if="link.href" :href="link.href" target="_blank" rel="noopener noreferrer">
+            <component :is="link.icon" :class="link.class" />{{ $t(link.title) }}<IconExternalLink class="w-[1em] h-[1em] text-current" />
+          </a>
+          <NuxtLink v-else :to="localePath(link.path || '/')">
             <component :is="link.icon" :class="link.class" />{{ $t(link.title) }}
           </NuxtLink>
         </li>

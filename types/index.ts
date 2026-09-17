@@ -75,7 +75,6 @@ declare global {
   interface Stats {
     activities: number;
     tools: number;
-    trainings: number;
   }
 
   interface Training {
