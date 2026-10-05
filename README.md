@@ -34,30 +34,9 @@ git pull
 npm install
 ```
 
-## Production deployment with Podman
+## Production
 
-The image builds the app at build time and serves it via the Nuxt server on port 3000.
+The app is deployed on the VM with Podman + Quadlet (documentation in French):
 
-### Build the image
-
-```bash
-podman build -t didanum-myple .
-```
-
-### Run as a systemd service (Quadlet)
-
-A Quadlet unit file is provided in [deploy/didanum-myple.container](deploy/didanum-myple.container). It exposes the app on `127.0.0.1:8082`.
-
-```bash
-cp deploy/didanum-myple.container ~/.config/containers/systemd/
-systemctl --user daemon-reload
-systemctl --user start didanum-myple
-```
-
-### Update
-
-```bash
-git pull
-podman build -t didanum-myple .
-systemctl --user restart didanum-myple
-```
+- [Initial deployment](docs/podman-deploy.md)
+- [Update](docs/podman-update.md)
