@@ -8,7 +8,8 @@ Image=localhost/didanum-myple:latest
 PublishPort=127.0.0.1:8082:3000
 
 [Service]
-ExecStartPre=/usr/bin/podman rm -f didanum-myple
+Restart=on-failure
+RestartSec=10s
 
 [Install]
 WantedBy=default.target
