@@ -34,3 +34,15 @@ systemctl --user status didanum-myple.service
 # Consulter les logs
 podman logs -f didanum-myple
 ```
+
+## 4. Nettoyer
+
+Une fois la nouvelle version vérifiée : chaque construction laisse l'image
+de l'étape de build et l'ancienne image, sans nom (`<none>`).
+
+```bash
+podman image prune -f
+```
+
+Jamais `-a`, qui supprimerait aussi les images nommées inutilisées ; voir
+`docs/podman.md` de `svx-web-configs`.
