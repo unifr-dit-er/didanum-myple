@@ -25,6 +25,9 @@
     "@ubclaunchpad/vue-fathom": "^2.0.0"
   },
   "overrides": {
-    "vite": "^7.3.6"
+    "vite": "^7.3.6",
+    "@tailwindcss/typography": {
+      "postcss-selector-parser": "^6.1.5"
+    }
   }
 }
